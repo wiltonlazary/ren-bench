@@ -1,7 +1,7 @@
 # Reactivity and disposal benchmarks
 
 Run these commands from the ren-bench checkout. rrx-core's design choices
-are in [its README](../../../../../rrx-core/wtree/_repo_/README.md).
+are in [its README](https://github.com/wiltonlazary/rrx-core).
 
 `bench/reactivity/scenarios.json` defines the scenarios: deep, broad, diamond,
 avoidable, repeated, unstable, churn, disposal, async and steps, with their

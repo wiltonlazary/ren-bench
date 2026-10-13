@@ -1,6 +1,6 @@
 # ren-bench
 
-Read [the workspace rules](../../../AGENTS.md), its shared `.ai/config/`,
+Read [the workspace rules](https://github.com/wiltonlazary/rui/blob/main/AGENTS.md), its shared `.ai/config/`,
 then [README.md](README.md) and [TODO.md](TODO.md).
 
 This private JavaScript project owns the workspace's benchmark harnesses,

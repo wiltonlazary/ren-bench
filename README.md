@@ -33,7 +33,7 @@ All tools and competitor versions remain pinned in their manifests and locks.
 ## Run
 
 All paths and commands below are relative to this checkout. Follow the
-[workspace resource rules](../../../.ai/config/resources.md): one heavy job
+[workspace resource rules](https://github.com/wiltonlazary/rui/blob/main/.ai/config/resources.md): one heavy job
 at a time, at least 8 GB available and load below 20. Node commands use both
 the address-space and heap caps, for example:
 
