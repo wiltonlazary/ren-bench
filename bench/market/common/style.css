@@ -1,0 +1,28 @@
+/* The one stylesheet of every implementation: the subset of Bootstrap 3 the
+   js-framework-benchmark table uses, with the remove glyph drawn in CSS
+   instead of an icon font. Light DOM pages link it; shadow-root
+   implementations adopt the same text. */
+* { box-sizing: border-box; }
+body, :host { font: 14px/1.42857 "Helvetica Neue", Helvetica, Arial, sans-serif; color: #333; background: #fff; margin: 0; }
+.container { padding: 0 15px; margin: 0 auto; width: 1170px; }
+.jumbotron { padding: 30px 60px; margin-bottom: 30px; background: #eee; border-radius: 6px; }
+.jumbotron h1 { font-size: 36px; margin: 0; font-weight: 500; }
+.row { margin: 0 -15px; display: flex; flex-wrap: wrap; }
+.col-md-6 { width: 50%; padding: 0 15px; }
+.col-sm-6 { width: 50%; padding: 0 15px; }
+.smallpad { padding: 5px; }
+.btn { display: inline-block; padding: 6px 12px; font-size: 14px; line-height: 1.42857; text-align: center; border: 1px solid transparent; border-radius: 4px; cursor: pointer; }
+.btn-primary { color: #fff; background: #337ab7; border-color: #2e6da4; }
+.btn-block { display: block; width: 100%; }
+.table { width: 100%; max-width: 100%; margin-bottom: 20px; border-collapse: collapse; border-spacing: 0; }
+.table > tbody > tr > td { padding: 8px; line-height: 1.42857; vertical-align: top; border-top: 1px solid #ddd; }
+.table-striped > tbody > tr:nth-of-type(odd) { background-color: #f9f9f9; }
+.table-hover > tbody > tr:hover { background-color: #f5f5f5; }
+.table > tbody > tr.danger > td { background-color: #f2dede; }
+.col-md-1 { width: 8.33333%; }
+.col-md-4 { width: 33.33333%; }
+td.col-md-6 { width: 50%; }
+a { color: #337ab7; text-decoration: none; cursor: pointer; }
+.glyphicon { position: relative; top: 1px; display: inline-block; font-style: normal; font-weight: 400; line-height: 1; }
+.glyphicon-remove::before { content: "\00d7"; }
+.preloadicon { position: absolute; top: -20px; left: -20px; }

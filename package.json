@@ -1,0 +1,34 @@
+{
+  "name": "ren-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The rui workspace's reactivity, DOM, worker UI, Skia and three.js benchmarks.",
+  "license": "UNLICENSED",
+  "engines": { "node": ">=22.15" },
+  "scripts": {
+    "test": "node --test test/*.test.js bench/market/*.test.mjs",
+    "bench": "node bench/reactivity/run.mjs --table",
+    "sweep": "node --expose-gc bench/reactivity/sweep.mjs",
+    "market:build": "node bench/market/build.mjs",
+    "market": "flock $HOME/.cache/chrome-bench.lock node bench/market/run.mjs",
+    "ui": "flock $HOME/.cache/chrome-bench.lock node bench/ui/run.mjs",
+    "skia": "node --import ren-core/loader bench/skia/frames.jsx",
+    "skia:browser": "flock $HOME/.cache/chrome-bench.lock node bench/skia/chrome.mjs",
+    "r3f": "flock $HOME/.cache/chrome-bench.lock node bench/r3f/run.mjs"
+  },
+  "dependencies": {
+    "rrx-core": "file:../../../rrx-core/wtree/_repo_",
+    "ren-core": "file:../../../ren-core/wtree/_repo_",
+    "ren-canv": "file:../../../ren-canv/wtree/_repo_",
+    "ren-dom": "file:../../../ren-dom/wtree/_repo_",
+    "ren-skia": "file:../../../ren-skia/wtree/_repo_",
+    "ren-three": "file:../../../ren-three/wtree/_repo_"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "happy-dom": "20.14.5",
+    "canvaskit-wasm": "0.40.0",
+    "three": "0.186.1"
+  }
+}

@@ -1,0 +1,102 @@
+<!-- Svelte 5 (runes): js-framework-benchmark's keyed svelte
+     (frameworks/keyed/svelte/src/Main.svelte), on the shared data module.
+     Async rows (async1k): an {#await} block over the promise of the rows. -->
+<script>
+	import { id as nextId, label as nextLabel, later } from '../../common/data.js';
+
+	let data = $state.raw([]);
+	let pending = $state.raw(null);
+	let selected = $state.raw();
+
+	class Item {
+		id = nextId();
+		label = $state.raw(nextLabel());
+	}
+	class Loaded {
+		id;
+		label = $state.raw('');
+		constructor(row) {
+			this.id = row.id;
+			this.label = row.label;
+		}
+	}
+	function buildData(count = 1000) {
+		const data = new Array(count);
+		for (let i = 0; i < count; i++) data[i] = new Item();
+		return data;
+	}
+	const add = () => (data = [...data, ...buildData(1000)]),
+		clear = () => {
+			pending = null;
+			data = [];
+		},
+		runAsync = () => {
+			data = [];
+			pending = later(1000).then((rows) =>
+				rows.map((row) => new Loaded(row))
+			);
+		},
+		partialUpdate = () => {
+			for (let i = 0; i < data.length; i += 10) {
+				const row = data[i];
+				row.label = row.label + ' !!!';
+			}
+		},
+		remove = (row) => {
+			const clone = data.slice();
+			clone.splice(clone.indexOf(row), 1);
+			data = clone;
+		},
+		run = () => {
+			pending = null;
+			data = buildData(1000);
+		},
+		runLots = () => {
+			pending = null;
+			data = buildData(10000);
+		},
+		swapRows = () => {
+			if (data.length > 998) {
+				const clone = data.slice();
+				const tmp = clone[1];
+				clone[1] = clone[998];
+				clone[998] = tmp;
+				data = clone;
+			}
+		};
+</script>
+
+<div class="container">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-6"><h1>Svelte 5</h1></div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="run" onclick={run}>Create 1,000 rows</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="runlots" onclick={runLots}>Create 10,000 rows</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="add" onclick={add}>Append 1,000 rows</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="update" onclick={partialUpdate}>Update every 10th row</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="clear" onclick={clear}>Clear</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="swaprows" onclick={swapRows}>Swap Rows</button></div>
+					<div class="col-sm-6 smallpad"><button type="button" class="btn btn-primary btn-block" id="runasync" onclick={runAsync}>Create 1,000 rows async</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<table class="table table-hover table-striped test-data">
+		<tbody>
+			{#if pending}
+				{#await pending then loaded}
+					{#each loaded as row (row)}
+						<tr class={selected === row.id ? 'danger' : ''}><td class="col-md-1">{row.id}</td><td class="col-md-4"><a onclick={() => { selected = row.id; }}>{row.label}</a></td><td class="col-md-1"><a onclick={() => remove(row)}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>
+					{/each}
+				{/await}
+			{:else}
+				{#each data as row (row)}
+					<tr class={selected === row.id ? 'danger' : ''}><td class="col-md-1">{row.id}</td><td class="col-md-4"><a onclick={() => { selected = row.id; }}>{row.label}</a></td><td class="col-md-1"><a onclick={() => remove(row)}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td><td class="col-md-6"></td></tr>
+				{/each}
+			{/if}
+		</tbody>
+	</table>
+	<span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+</div>

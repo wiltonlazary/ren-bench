@@ -1,0 +1,13 @@
+{
+  "name": "ren-bench-r3f",
+  "private": true,
+  "type": "module",
+  "description": "ren-three against react-three-fiber on the same scene, in headless Chrome.",
+  "dependencies": {
+    "@react-three/fiber": "9.8.1",
+    "esbuild": "0.28.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "three": "0.186.1"
+  }
+}

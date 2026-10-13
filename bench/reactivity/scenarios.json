@@ -1,0 +1,111 @@
+{
+  "about": "The definition of rrx-core's reactivity scenarios, run by every library in the benchmark. Graph shapes follow the js-reactivity-benchmark kairo suite. Every write is followed by exactly one propagation: rrx-core calls `$flush` after each write, and libraries with synchronous effects run each write in its own batch. Effects run once when created. A result counts only when sum and runs equal the expected values.",
+  "version": 1,
+  "width": 50,
+  "updates": 400,
+  "warmup": 200,
+  "rounds": 30,
+  "tiers": "Every library receives 200 identical warm-up rounds before timing. Node v24.15.0 async traces found background optimization through round 142; 30 warm-ups included tier changes in the timed samples. Repeated processes still measure variability after tier-up.",
+  "flush": "one propagation per write",
+  "scenarios": [
+    {
+      "name": "deep",
+      "describe": "A chain of `width` memos from one signal, each adding 1 to the previous; one effect reads the tail. The signal is written 1..updates.",
+      "width": 50,
+      "updates": 400,
+      "expect": {
+        "sum": 100250,
+        "runs": 401
+      }
+    },
+    {
+      "name": "broad",
+      "describe": "`width` memos read the signal, memo i yielding signal + i; each has its own effect. The signal is written 1..updates.",
+      "width": 50,
+      "updates": 400,
+      "expect": {
+        "sum": 4501225,
+        "runs": 20050
+      }
+    },
+    {
+      "name": "diamond",
+      "describe": "`width` memos each yield signal + 1; one memo sums them in order; one effect reads the sum. The signal is written 1..updates.",
+      "width": 50,
+      "updates": 400,
+      "expect": {
+        "sum": 4030050,
+        "runs": 401
+      }
+    },
+    {
+      "name": "avoidable",
+      "describe": "A memo reads the signal and always yields 0; a chain of `chain` memos each add 1; one effect reads the tail. Equal-value cutoff keeps the effect from rerunning. The signal is written 1..updates.",
+      "chain": 5,
+      "updates": 400,
+      "expect": {
+        "sum": 5,
+        "runs": 1
+      }
+    },
+    {
+      "name": "repeated",
+      "describe": "One memo sums `reads` reads of the same signal; one effect reads it. The signal is written 1..updates.",
+      "reads": 30,
+      "updates": 400,
+      "expect": {
+        "sum": 2406000,
+        "runs": 401
+      }
+    },
+    {
+      "name": "unstable",
+      "describe": "Signals odd = 1 and even = 2; a memo yields (source % 2 == 0 ? even : odd) + source, so its dependencies switch with the value; one effect reads it. The signal is written 1..updates.",
+      "odd": 1,
+      "even": 2,
+      "updates": 400,
+      "expect": {
+        "sum": 40602,
+        "runs": 201
+      }
+    },
+    {
+      "name": "churn",
+      "describe": "For round in 0..rounds-1: a new owned scope creates `width` pairs of (memo yielding signal + index, effect adding it to the sum); the signal is written round; one propagation; the scope is disposed. Nothing else is disposed until the end.",
+      "rounds": 100,
+      "width": 10,
+      "expect": {
+        "sum": 106965,
+        "runs": 1990
+      }
+    },
+    {
+      "name": "disposal",
+      "describe": "`scopes` owned scopes each hold a memo (signal + index), an effect reading it and a cleanup; then every scope is disposed with the library's own ownership primitive, and the signal is written once more (nothing may run). Checksum: cleanups run and effect runs. The worker also reports `blocking`, the time until the last dispose call returned (rrx-retire: `$retire` returns at once and the sweep finishes after).",
+      "scopes": 10000,
+      "expect": {
+        "sum": 10000,
+        "runs": 10000
+      }
+    },
+    {
+      "name": "async",
+      "describe": "`tasks` async values, task i tracking signal + i; each launch gets a synchronous deferred (resolve), so timing measures the graph, not the event loop. All first launches complete with input*2; then two writes launch twice more, the newer launches complete first and the older ones late with a poison value that must be ignored. Checksum: the sum of the final values and the number of ignored late completions. Libraries without a synchronous async primitive use one generic task (adapters.mjs).",
+      "tasks": 1000,
+      "expect": {
+        "sum": 1003000,
+        "runs": 1000
+      }
+    },
+    {
+      "name": "steps",
+      "describe": "`tasks` async values, task i tracking signal + i and made of `steps` sequential async steps (each adds 1), written the way applications chain requests: an async function awaiting a promise per step. The harness settles the steps in rounds and lets microtasks run between rounds. After every chain's first step the signal changes: the superseded chains are settled last, after every current chain completed, so an accepted late completion changes the sum. Checksum: the sum of the final values and the number of effects that saw a final value.",
+      "tasks": 1000,
+      "steps": 8,
+      "expect": {
+        "sum": 508500,
+        "runs": 1000
+      }
+    }
+  ]
+}

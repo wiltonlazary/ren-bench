@@ -1,0 +1,13 @@
+{
+  "name": "ren-bench-reactivity",
+  "private": true,
+  "type": "module",
+  "description": "Pinned market libraries for ren-bench reactivity comparisons.",
+  "dependencies": {
+    "@preact/signals-core": "1.14.4",
+    "@solidjs/signals": "2.0.0-rc.9",
+    "@vue/reactivity": "3.5.43",
+    "alien-signals": "3.2.1",
+    "solid-js": "1.9.15"
+  }
+}

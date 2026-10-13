@@ -1,0 +1,11 @@
+{
+  "name": "ren-bench-market-solid1",
+  "private": true,
+  "type": "module",
+  "description": "Solid 1.x and its compiler, kept apart from Solid 2 in bench/market/node_modules.",
+  "dependencies": {
+    "@babel/core": "7.29.7",
+    "babel-preset-solid": "1.9.15",
+    "solid-js": "1.9.15"
+  }
+}
