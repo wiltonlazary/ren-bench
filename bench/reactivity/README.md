@@ -129,8 +129,7 @@ What the readings say:
 
 - The async scenario is bimodal for every library (a process settles in a
   fast or a slow mode), so a single median can mislead in either
-  direction; claims about it rest on paired runs. Async parity is open
-  work in rrx-core's TODO.
+  direction; claims about it rest on paired runs.
 - The other libraries run the generic task (a tracking effect and a value
   signal), which gives none of the `$task` guarantees (the stale-read
   pull, status at once, superseded completions ignored even before the
