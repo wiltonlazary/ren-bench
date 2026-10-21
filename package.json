@@ -1,6 +1,6 @@
 {
   "name": "ren-bench",
-  "version": "0.1.0",
+  "version": "0.1.12",
   "private": true,
   "type": "module",
   "description": "The rui workspace's reactivity, DOM, worker UI, Skia and three.js benchmarks.",
