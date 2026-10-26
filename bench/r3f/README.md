@@ -21,7 +21,7 @@ packages through their public entries.
 
 ```sh
 cd bench/r3f && npm install            # once
-cd ../.. && flock "$HOME/.cache/chrome-bench.lock" node bench/r3f/run.mjs [--rounds 10] [--warmup 3]
+cd ../.. && flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/r3f/run.mjs [--rounds 10] [--warmup 3]
 ```
 
 Bundles and results (with harness and family checkout provenance) go to `artifact/bench/r3f`.

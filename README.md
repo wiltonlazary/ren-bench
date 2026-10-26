@@ -67,7 +67,7 @@ node --expose-gc bench/ui/dispose.mjs --pairs 10
 node --expose-gc bench/ui/rows.mjs --base <ren-core-checkout> --pairs 20
 node --import ren-core/loader bench/skia/busy.jsx --frames 400 --warmup 50
 node --import ren-core/loader bench/skia/opacity.jsx --frames 400 --warmup 50
-flock "$HOME/.cache/chrome-bench.lock" node bench/market/abba.mjs --base <ren-bench-checkout>
+flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/abba.mjs --base <ren-bench-checkout>
 node bench/reactivity/paired.mjs 30 async,steps <candidate-rrx-core-checkout> <control-rrx-core-checkout>
 ```
 

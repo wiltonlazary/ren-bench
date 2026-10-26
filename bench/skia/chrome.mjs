@@ -6,7 +6,7 @@
 // measures `--rounds` rounds after `--warmup`. Take the machine-wide Chrome
 // lock (resources.md):
 //
-//   flock "$HOME/.cache/chrome-bench.lock" node bench/skia/chrome.mjs [--suite aria|damage] [--runs 4] [--rounds 10] [--warmup 3]
+//   flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/skia/chrome.mjs [--suite aria|damage] [--runs 4] [--rounds 10] [--warmup 3]
 
 import { build } from 'esbuild';
 import { createServer } from 'node:http';

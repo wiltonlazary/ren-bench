@@ -7,7 +7,7 @@
 // implementation's. Every sample is on a fresh page, the implementations
 // alternating in ABBA order.
 //
-//   flock "$HOME/.cache/chrome-bench.lock" node bench/r3f/run.mjs [--rounds 10] [--warmup 3]
+//   flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/r3f/run.mjs [--rounds 10] [--warmup 3]
 //
 // Bundles and results go to the build directory (artifact/bench/r3f).
 

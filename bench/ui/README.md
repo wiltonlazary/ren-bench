@@ -13,7 +13,7 @@ environment and method it ran under.
 
 ```sh
 node bench/ui/run.mjs --build                 # bundles only
-flock "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs [--rounds 10] [--warmup 3] [--keys 40] [--burst-keys 100] [--interval 30] [--work N]
+flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs [--rounds 10] [--warmup 3] [--keys 40] [--burst-keys 100] [--interval 30] [--work N]
 node --import ren-core/loader bench/ui/boundary.mjs [--rounds 200] [--warmup 60]
 ```
 
@@ -156,7 +156,7 @@ What the readings say:
 ### Disposal under input
 
 ```sh
-flock "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs --scenario dispose [--keys 40] [--interval 30] [--repeat 4] [--weight 0]
+flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs --scenario dispose [--keys 40] [--interval 30] [--repeat 4] [--weight 0]
 node --expose-gc --import ren-core/loader bench/ui/dispose.mjs [--pairs 10] [--sizes 100,300,1000,3000,10000]
 ```
 

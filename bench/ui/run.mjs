@@ -1,8 +1,8 @@
 // The UI benchmark of the direct and worker modes, in headless Chrome.
 //
-//   flock "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs [--rounds 10] [--warmup 3] [--keys 40] [--burst-keys 100]
+//   flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs [--rounds 10] [--warmup 3] [--keys 40] [--burst-keys 100]
 //                                                                [--interval 30] [--work 0] [--yielding timeout|message] [--only dom-direct-batch,skia-worker-qos,…] [--json]
-//   flock "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs --scenario dispose [--keys 40] [--interval 30] [--repeat 5] [--weight 0] [--only dom-direct-batch-on,…]
+//   flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/ui/run.mjs --scenario dispose [--keys 40] [--interval 30] [--repeat 5] [--weight 0] [--only dom-direct-batch-on,…]
 //
 // Bundles bench/ui/page.jsx and bench/ui/worker.jsx with esbuild, serves them
 // with CanvasKit and the font, and runs each configuration in its own Chrome

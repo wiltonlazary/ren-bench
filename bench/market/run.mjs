@@ -1,7 +1,7 @@
 // The market UI benchmark: one table application (js-framework-benchmark's
 // keyed table) in each implementation of impls.mjs, timed in headless Chrome.
 //
-//   flock "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs [--only a,b] [--benches create1k,swap,…] [--rounds 10]
+//   flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs [--only a,b] [--benches create1k,swap,…] [--rounds 10]
 //                                                                       [--warmup 5] [--memory 3] [--slowdown 1] [--no-build] [--out file.json]
 //
 // Builds the implementations (build.mjs), serves them, and runs them one at

@@ -10,8 +10,8 @@ companion of the reactivity-core comparison in `bench/reactivity/run.mjs`.
 ```sh
 cd <ren-bench checkout>   # bundles land in artifact/bench/market/dist (the build directory)
 npm --prefix bench/market install && npm --prefix bench/market/solid1 install   # once
-flock "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs                                   # everything: build, run, tables
-flock "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs --only ren-dom,solid2 --rounds 15 --benches swap,select
+flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs                                   # everything: build, run, tables
+flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs --only ren-dom,solid2 --rounds 15 --benches swap,select
 node bench/market/build.mjs                                 # bundles and sizes only
 ```
 
@@ -30,7 +30,7 @@ node bench/market/build.mjs                                 # bundles and sizes 
 
 `TRACE=1` prints the page's console and exceptions.
 
-`flock "$HOME/.cache/chrome-bench.lock" node bench/market/abba.mjs --base <checkout> [--only ren-dom-c] [--benches create1k,create10k] [--pairs 4]`
+`flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/abba.mjs --base <checkout> [--only ren-dom-c] [--benches create1k,create10k] [--pairs 4]`
 runs this checkout (A) against another ren-bench checkout (B) in ABBA order.
 Each checkout's file-linked family dependencies select its library revisions, each
 side with its own `run.mjs`, and prints the medians of `total` and
@@ -290,7 +290,7 @@ What the readings say:
    `vue`, `preact`, `react`, `ren`, `ren-compiled`; add one there for a new compiler),
    `packages` whose versions to record, optional `from` and `note`.
 3. Pin its dependencies exactly in `package.json`, install, and run
-   `flock "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs --only <name> --rounds 2` to check that every
+   `flock -w 1800 "$HOME/.cache/chrome-bench.lock" node bench/market/run.mjs --only <name> --rounds 2` to check that every
    benchmark validates, then the full run.
 
 A ren-core variant (template cloning, event delegation, another reconciler)
