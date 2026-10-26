@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "description": "Market UI frameworks for the js-framework-benchmark-style table comparison; installed into bench/market/node_modules only. Solid 1.x lives in solid1/ with its own node_modules.",
-  "scripts": { "bench": "flock $HOME/.cache/chrome-bench.lock node run.mjs", "test": "node --test *.test.mjs" },
+  "scripts": { "bench": "flock -w 1800 $HOME/.cache/chrome-bench.lock node run.mjs", "test": "node --test *.test.mjs" },
   "dependencies": {
     "@babel/core": "7.29.7",
     "@preact/signals": "2.11.2",

@@ -11,11 +11,11 @@
     "bench": "node bench/reactivity/run.mjs --table",
     "sweep": "node --expose-gc bench/reactivity/sweep.mjs",
     "market:build": "node bench/market/build.mjs",
-    "market": "flock $HOME/.cache/chrome-bench.lock node bench/market/run.mjs",
-    "ui": "flock $HOME/.cache/chrome-bench.lock node bench/ui/run.mjs",
+    "market": "flock -w 1800 $HOME/.cache/chrome-bench.lock node bench/market/run.mjs",
+    "ui": "flock -w 1800 $HOME/.cache/chrome-bench.lock node bench/ui/run.mjs",
     "skia": "node --import ren-core/loader bench/skia/frames.jsx",
-    "skia:browser": "flock $HOME/.cache/chrome-bench.lock node bench/skia/chrome.mjs",
-    "r3f": "flock $HOME/.cache/chrome-bench.lock node bench/r3f/run.mjs"
+    "skia:browser": "flock -w 1800 $HOME/.cache/chrome-bench.lock node bench/skia/chrome.mjs",
+    "r3f": "flock -w 1800 $HOME/.cache/chrome-bench.lock node bench/r3f/run.mjs"
   },
   "dependencies": {
     "rrx-core": "file:../../../rrx-core/wtree/_repo_",

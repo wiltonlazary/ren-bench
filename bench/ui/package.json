@@ -4,7 +4,7 @@
   "type": "module",
   "description": "ren-core worker runtime and disposal benchmarks in ren-bench, using linked public family packages.",
   "scripts": {
-    "bench": "flock $HOME/.cache/chrome-bench.lock node run.mjs"
+    "bench": "flock -w 1800 $HOME/.cache/chrome-bench.lock node run.mjs"
   },
   "dependencies": {
     "canvaskit-wasm": "0.40.0",
