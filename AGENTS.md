@@ -14,7 +14,7 @@ own their implementation and behavioral tests; fix library defects there.
 - Each competitor suite keeps its pinned dependencies and lockfile. Solid 1
   stays isolated from Solid 2 in `bench/market/solid1/`.
 - Generated output, Chrome profiles and scratch belong under the ignored
-  `artifact` link to `../../build/_repo__0.1.13`.
+  `artifact` link to `../../build/_repo__0.1.14`.
 - Result files keep the provenance of their run. Results identify this
   harness and every family checkout the measured path uses.
 - Keep canonical workloads, checksums and timing boundaries unchanged when
